@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#171916" />
+  <meta name="description" content="Строительные и отделочные работы: ремонт, плитка, штукатурка, покраска и комплексная отделка. Прозрачная смета и аккуратное выполнение." />
+  <title>Гадир — строительство и отделка</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #171916;
+      --ink-2: #20231e;
+      --paper: #f3f1e9;
+      --paper-2: #eae7dd;
+      --muted: #77796f;
+      --line: rgba(23,25,22,.13);
+      --accent: #ed6238;
+      --accent-dark: #cf4c28;
+      --lime: #d8ed9a;
+      --white: #fffefa;
+      --radius: 22px;
+      --shadow: 0 22px 70px rgba(20,22,18,.13);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    ::selection { background: var(--lime); color: var(--ink); }
+    .wrap { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; line-height: 1; letter-spacing: .18em; text-transform: uppercase; font-weight: 800; color: var(--muted); }
+    .eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 42px; }
+    .section-head h2 { margin: 14px 0 0; font-family: Manrope, sans-serif; font-size: clamp(34px, 5vw, 58px); line-height: 1.02; letter-spacing: -.055em; font-weight: 800; max-width: 700px; }
+    .section-head p { color: var(--muted); max-width: 340px; margin: 0 0 5px; line-height: 1.65; font-size: 14px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 54px; padding: 0 23px; border: 0; border-radius: 999px; background: var(--accent); color: white; font-weight: 800; font-size: 13px; transition: transform .25s ease, background .25s ease, box-shadow .25s ease; box-shadow: 0 10px 25px rgba(237,98,56,.19); }
+    .btn:hover { background: var(--accent-dark); transform: translateY(-3px); box-shadow: 0 15px 34px rgba(237,98,56,.27); }
+    .btn:active { transform: translateY(-1px) scale(.99); }
+    .btn svg { width: 17px; height: 17px; transition: transform .25s ease; }
+    .btn:hover svg { transform: translate(3px,-2px); }
+    .btn-dark { background: var(--ink); box-shadow: none; }
+    .btn-dark:hover { background: #30352d; }
+    .btn-light { color: var(--ink); background: var(--white); box-shadow: none; }
+    .btn-light:hover { background: var(--lime); }
+
+    
+    .header { position: fixed; z-index: 50; top: 0; left: 0; right: 0; transition: background .3s ease, box-shadow .3s ease, transform .3s ease; }
+    .header.scrolled { background: rgba(243,241,233,.9); backdrop-filter: blur(18px); box-shadow: 0 1px 0 var(--line); }
+    .nav { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-family: Manrope, sans-serif; font-weight: 900; letter-spacing: -.05em; font-size: 18px; white-space: nowrap; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; color: var(--ink); background: var(--lime); border-radius: 12px 12px 12px 3px; transform: rotate(-4deg); }
+    .brand-mark svg { width: 22px; height: 22px; transform: rotate(4deg); }
+    .brand span small { display: block; margin-top: 1px; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: .15em; font-size: 8px; }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 2.5vw, 34px); }
+    .nav-links a { position: relative; font-size: 12px; font-weight: 700; color: #55584f; transition: color .2s ease; }
+    .nav-links a::after { content: ''; position: absolute; height: 2px; left: 0; right: 100%; bottom: -8px; background: var(--accent); transition: right .25s ease; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { right: 0; }
+    .nav-cta { min-height: 44px; padding-inline: 19px; font-size: 12px; }
+    .menu-toggle { display: none; border: 0; background: var(--ink); color: white; width: 44px; height: 44px; border-radius: 50%; place-items: center; }
+    .menu-toggle svg { width: 20px; height: 20px; }
+
+    
+    .hero { min-height: 760px; padding: 150px 0 80px; position: relative; overflow: hidden; background: var(--ink); color: white; isolation: isolate; }
+    .hero::before { content: ''; position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, rgba(16,19,16,.96) 0%, rgba(16,19,16,.82) 46%, rgba(16,19,16,.22) 100%), url('https://www.willowcasa.in/images/services/main-img/13.png') center 45% / cover; transform: scale(1.035); animation: heroZoom 18s ease-in-out infinite alternate; }
+    .hero::after { content: ''; position: absolute; z-index: -1; inset: 0; opacity: .14; background-image: linear-gradient(rgba(255,255,255,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px); background-size: 62px 62px; mask-image: linear-gradient(90deg, black, transparent 75%); }
+    @keyframes heroZoom { from { transform: scale(1.035); } to { transform: scale(1.1); } }
+    .hero-content { max-width: 760px; position: relative; z-index: 2; }
+    .hero .eyebrow { color: rgba(255,255,255,.62); }
+    .hero h1 { margin: 24px 0 22px; font-family: Manrope, sans-serif; font-size: clamp(48px, 7.4vw, 92px); line-height: .96; letter-spacing: -.075em; font-weight: 800; }
+    .hero h1 span { color: var(--lime); display: inline-block; }
+    .hero-lead { max-width: 510px; color: rgba(255,255,255,.72); font-size: 16px; line-height: 1.75; margin: 0 0 32px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { display: flex; align-items: center; gap: 12px; margin-top: 55px; color: rgba(255,255,255,.58); font-size: 11px; letter-spacing: .05em; }
+    .hero-note .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 6px rgba(216,237,154,.11); }
+    .hero-stamp { position: absolute; z-index: 2; right: max(24px, calc((100vw - 1180px)/2)); bottom: 78px; width: 158px; height: 158px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: white; transform: rotate(9deg); animation: float 5s ease-in-out infinite; }
+    .hero-stamp::before { content: ''; position: absolute; inset: 9px; border: 1px dashed rgba(255,255,255,.4); border-radius: 50%; }
+    .hero-stamp strong { display: block; font-family: Manrope, sans-serif; font-size: 27px; line-height: 1; letter-spacing: -.06em; }
+    .hero-stamp small { display: block; margin-top: 8px; text-transform: uppercase; font-size: 8px; letter-spacing: .18em; line-height: 1.5; }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(9deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
+    .hero-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 17px; background: var(--paper); clip-path: polygon(0 100%, 0 0, 100% 100%); }
+
+    
+    .marquee { overflow: hidden; background: var(--lime); color: var(--ink); padding: 15px 0; transform: rotate(-1deg) scale(1.02); }
+    .marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+    .marquee-group { display: flex; align-items: center; gap: 29px; padding-right: 29px; white-space: nowrap; font-family: Manrope, sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.03em; font-size: 14px; }
+    .marquee-group i { display: inline-block; width: 8px; height: 8px; background: var(--accent); border-radius: 2px; transform: rotate(45deg); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    
+    .services { padding: 125px 0 115px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .service-card { min-height: 260px; position: relative; padding: 27px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.42); overflow: hidden; transition: transform .35s ease, background .35s ease, box-shadow .35s ease; }
+    .service-card:hover { transform: translateY(-7px); background: var(--white); box-shadow: var(--shadow); }
+    .service-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: var(--paper-2); color: var(--ink); transition: background .3s, transform .3s; }
+    .service-card:hover .service-icon { background: var(--lime); transform: rotate(-7deg); }
+    .service-icon svg { width: 23px; height: 23px; }
+    .service-card h3 { margin: 27px 0 9px; font-family: Manrope, sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.04em; }
+    .service-card p { margin: 0; max-width: 290px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .service-price { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+    .service-price strong { color: var(--accent); font-size: 14px; }
+    .service-number { position: absolute; top: 25px; right: 25px; color: rgba(23,25,22,.18); font-family: Manrope, sans-serif; font-weight: 800; font-size: 12px; }
+
+    
+    .about { padding: 108px 0; background: var(--ink); color: white; position: relative; overflow: hidden; }
+    .about::after { content: 'М'; position: absolute; right: -28px; bottom: -230px; font-family: Manrope, sans-serif; font-size: 650px; font-weight: 900; color: rgba(255,255,255,.025); line-height: 1; pointer-events: none; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; position: relative; z-index: 1; }
+    .about-visual { min-height: 500px; position: relative; }
+    .about-photo { position: absolute; inset: 0 44px 35px 0; border-radius: 26px; overflow: hidden; background: #30352e; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.78); transition: transform .8s ease; }
+    .about-visual:hover .about-photo img { transform: scale(1.05); }
+    .about-tag { position: absolute; right: 0; bottom: 0; width: 210px; padding: 25px; border-radius: 20px; background: var(--lime); color: var(--ink); box-shadow: 0 20px 55px rgba(0,0,0,.24); }
+    .about-tag strong { display: block; font-family: Manrope, sans-serif; font-size: 34px; line-height: 1; letter-spacing: -.06em; }
+    .about-tag span { display: block; margin-top: 9px; font-size: 11px; font-weight: 700; line-height: 1.45; }
+    .about .eyebrow { color: rgba(255,255,255,.5); }
+    .about h2 { margin: 17px 0 20px; font-family: Manrope, sans-serif; font-size: clamp(36px, 5vw, 57px); line-height: 1.02; letter-spacing: -.06em; }
+    .about h2 em { color: var(--lime); font-style: normal; }
+    .about-copy { max-width: 490px; color: rgba(255,255,255,.62); font-size: 14px; line-height: 1.8; }
+    .benefits { display: grid; gap: 16px; margin: 29px 0 34px; }
+    .benefit { display: flex; gap: 13px; align-items: flex-start; }
+    .benefit-check { flex: 0 0 23px; width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; background: rgba(216,237,154,.14); color: var(--lime); }
+    .benefit-check svg { width: 13px; height: 13px; }
+    .benefit strong { display: block; margin-bottom: 4px; font-size: 13px; }
+    .benefit span { color: rgba(255,255,255,.48); font-size: 12px; line-height: 1.5; }
+
+    
+    .pricing { padding: 120px 0; }
+    .pricing-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: stretch; }
+    .price-list { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 30px; }
+    .price-row { min-height: 67px; display: grid; grid-template-columns: 1fr auto auto; gap: 26px; align-items: center; border-bottom: 1px solid var(--line); }
+    .price-row:last-child { border-bottom: 0; }
+    .price-row span:first-child { font-size: 13px; font-weight: 700; }
+    .price-unit { color: var(--muted); font-size: 11px; }
+    .price-value { min-width: 118px; text-align: right; color: var(--accent); font-family: Manrope, sans-serif; font-size: 17px; font-weight: 900; letter-spacing: -.03em; }
+    .price-note { margin: 18px 3px 4px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .calculator { position: relative; overflow: hidden; padding: 33px; border-radius: var(--radius); background: var(--ink); color: white; }
+    .calculator::after { content: ''; position: absolute; width: 240px; height: 240px; right: -100px; top: -100px; border-radius: 50%; border: 1px solid rgba(216,237,154,.2); box-shadow: 0 0 0 25px rgba(216,237,154,.025), 0 0 0 50px rgba(216,237,154,.025); }
+    .calculator .eyebrow { color: rgba(255,255,255,.48); }
+    .calculator h3 { position: relative; z-index: 1; margin: 15px 0 25px; font-family: Manrope, sans-serif; font-size: 30px; line-height: 1.08; letter-spacing: -.05em; }
+    .field { display: grid; gap: 8px; margin-bottom: 17px; }
+    .field label { color: rgba(255,255,255,.62); font-size: 11px; font-weight: 700; }
+    .field input, .field select, .field textarea { width: 100%; height: 49px; padding: 0 14px; border: 1px solid rgba(255,255,255,.15); border-radius: 12px; outline: 0; color: white; background: rgba(255,255,255,.07); transition: border .2s, background .2s; }
+    .field textarea { height: 100px; padding-top: 13px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--lime); background: rgba(255,255,255,.1); }
+    .field select option { color: var(--ink); }
+    .calc-result { display: flex; align-items: end; justify-content: space-between; gap: 15px; padding: 20px 0 22px; margin-top: 7px; border-top: 1px solid rgba(255,255,255,.14); }
+    .calc-result span { display: block; color: rgba(255,255,255,.55); font-size: 11px; }
+    .calc-result strong { display: block; margin-top: 5px; color: var(--lime); font-family: Manrope, sans-serif; font-size: clamp(27px, 3vw, 36px); line-height: 1; letter-spacing: -.06em; }
+    .calc-result small { color: rgba(255,255,255,.45); font-size: 10px; text-align: right; line-height: 1.5; }
+    .calculator .btn { width: 100%; }
+
+    
+    .projects { padding: 110px 0; background: var(--paper-2); }
+    .project-grid { display: grid; grid-template-columns: 1.15fr .85fr .85fr; gap: 14px; }
+    .project-card { min-height: 390px; position: relative; overflow: hidden; border-radius: var(--radius); background: #30342d; isolation: isolate; }
+    .project-card:first-child { min-height: 470px; }
+    .project-card::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(0,0,0,.04) 25%, rgba(0,0,0,.78) 100%); }
+    .project-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+    .project-card:hover img { transform: scale(1.08); }
+    .project-info { position: absolute; z-index: 2; left: 25px; right: 25px; bottom: 24px; color: white; }
+    .project-info span { display: inline-block; margin-bottom: 10px; padding: 7px 10px; border-radius: 99px; background: rgba(255,255,255,.16); backdrop-filter: blur(10px); font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+    .project-info h3 { margin: 0; font-family: Manrope, sans-serif; font-size: clamp(20px, 2.4vw, 29px); line-height: 1.05; letter-spacing: -.05em; }
+    .photo-caption { margin-top: 17px; color: var(--muted); font-size: 10px; line-height: 1.55; }
+
+    
+    .steps { padding: 120px 0 125px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; counter-reset: step; }
+    .step { position: relative; min-height: 225px; padding: 25px; border: 1px solid var(--line); border-radius: 20px; counter-increment: step; transition: border .3s, transform .3s, background .3s; }
+    .step:hover { transform: translateY(-5px); border-color: rgba(237,98,56,.4); background: rgba(255,255,255,.5); }
+    .step::before { content: '0' counter(step); display: block; color: var(--accent); font-family: Manrope, sans-serif; font-size: 13px; font-weight: 900; }
+    .step::after { content: '↗'; position: absolute; top: 23px; right: 24px; color: rgba(23,25,22,.24); font-size: 20px; transition: color .2s, transform .2s; }
+    .step:hover::after { color: var(--accent); transform: translate(3px,-3px); }
+    .step h3 { margin: 39px 0 9px; font-family: Manrope, sans-serif; font-size: 18px; letter-spacing: -.04em; }
+    .step p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+
+    
+    .contact { padding: 0 0 110px; }
+    .contact-panel { position: relative; overflow: hidden; padding: 66px; border-radius: 30px; color: white; background: var(--accent); }
+    .contact-panel::before, .contact-panel::after { content: ''; position: absolute; border: 1px solid rgba(255,255,255,.23); border-radius: 50%; pointer-events: none; }
+    .contact-panel::before { width: 530px; height: 530px; right: -135px; top: -320px; }
+    .contact-panel::after { width: 390px; height: 390px; right: -60px; top: -250px; }
+    .contact-content { position: relative; z-index: 1; max-width: 690px; }
+    .contact-panel .eyebrow { color: rgba(255,255,255,.72); }
+    .contact-panel h2 { margin: 17px 0 16px; font-family: Manrope, sans-serif; font-size: clamp(38px, 6vw, 66px); line-height: .98; letter-spacing: -.065em; }
+    .contact-panel p { max-width: 450px; margin: 0 0 28px; color: rgba(255,255,255,.79); font-size: 14px; line-height: 1.7; }
+    .contact-panel .btn { background: var(--ink); }
+    .contact-panel .btn:hover { background: #30352d; }
+    .contact-details { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin: -7px 0 27px; color: rgba(255,255,255,.86); font-size: 13px; }
+    .contact-person { font-weight: 800; color: #fff; }
+    .contact-details a { color: #fff; text-decoration: none; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,.45); padding-bottom: 3px; transition: opacity .2s, border-color .2s; }
+    .contact-details a:hover { opacity: .78; border-color: #fff; }
+    @media (max-width: 520px) { .contact-details { align-items: flex-start; flex-direction: column; gap: 11px; } }
+
+    
+    .footer { padding: 35px 0 26px; background: var(--ink); color: white; }
+    .footer-top { display: flex; justify-content: space-between; gap: 30px; align-items: center; padding-bottom: 29px; border-bottom: 1px solid rgba(255,255,255,.13); }
+    .footer .brand-mark { background: var(--lime); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 23px; }
+    .footer-links a { color: rgba(255,255,255,.58); font-size: 11px; transition: color .2s; }
+    .footer-links a:hover { color: var(--lime); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 21px; color: rgba(255,255,255,.36); font-size: 10px; }
+    .footer-bottom a { color: rgba(255,255,255,.6); }
+
+    
+    .modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(10,12,10,.72); backdrop-filter: blur(9px); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; }
+    .modal.open { opacity: 1; visibility: visible; }
+    .modal-card { width: min(520px, 100%); max-height: min(90vh, 760px); overflow: auto; position: relative; padding: 34px; border-radius: 24px; background: var(--paper); transform: translateY(18px) scale(.98); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+    .modal.open .modal-card { transform: translateY(0) scale(1); }
+    .modal-close { position: absolute; top: 18px; right: 18px; width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; color: var(--ink); background: var(--paper-2); }
+    .modal-close svg { width: 17px; height: 17px; }
+    .modal-card h3 { margin: 12px 0 8px; font-family: Manrope, sans-serif; font-size: 32px; letter-spacing: -.06em; line-height: 1; }
+    .modal-card > p { margin: 0 0 25px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .modal-card .field label { color: var(--muted); }
+    .modal-card .field input, .modal-card .field select, .modal-card .field textarea { border-color: var(--line); color: var(--ink); background: rgba(255,255,255,.68); }
+    .modal-card .field select option { color: var(--ink); }
+    .modal-card .btn { width: 100%; margin-top: 5px; }
+    .toast { position: fixed; z-index: 120; left: 50%; bottom: 25px; width: max-content; max-width: calc(100% - 32px); padding: 14px 18px; border-radius: 99px; color: white; background: var(--ink); box-shadow: var(--shadow); font-size: 12px; font-weight: 700; opacity: 0; transform: translate(-50%, 20px); pointer-events: none; transition: opacity .25s, transform .25s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .08s; } .delay-2 { transition-delay: .16s; } .delay-3 { transition-delay: .24s; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+
+    @media (max-width: 960px) {
+      .hero { min-height: 690px; }
+      .hero-stamp { right: 35px; bottom: 48px; width: 130px; height: 130px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { gap: 48px; }
+      .pricing-layout { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr 1fr; }
+      .project-card:first-child { grid-column: span 2; min-height: 420px; }
+      .project-card { min-height: 330px; }
+      .steps-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 34px, 540px); }
+      .nav { min-height: 72px; }
+      .nav-cta { display: none; }
+      .menu-toggle { display: grid; }
+      .nav-links { position: fixed; inset: 72px 0 auto; padding: 18px 24px 26px; display: flex; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper); box-shadow: 0 20px 30px rgba(0,0,0,.1); transform: translateY(-12px); opacity: 0; visibility: hidden; transition: .25s; }
+      .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
+      .nav-links a { padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+      .nav-links a::after { display: none; }
+      .hero { min-height: 710px; padding-top: 135px; padding-bottom: 60px; }
+      .hero::before { background-position: 60% center; background-image: linear-gradient(90deg, rgba(16,19,16,.94) 0%, rgba(16,19,16,.72) 100%), url('https://www.willowcasa.in/images/services/main-img/13.png'); }
+      .hero h1 { font-size: clamp(47px, 14vw, 72px); }
+      .hero-lead { font-size: 14px; max-width: 390px; }
+      .hero-stamp { width: 104px; height: 104px; right: 27px; bottom: 35px; }
+      .hero-stamp strong { font-size: 20px; }
+      .hero-stamp small { font-size: 6px; }
+      .hero-note { margin-top: 37px; max-width: 230px; line-height: 1.5; }
+      .section-head { display: block; margin-bottom: 30px; }
+      .section-head p { margin-top: 15px; }
+      .services, .pricing, .steps { padding: 85px 0; }
+      .services-grid { grid-template-columns: 1fr; gap: 10px; }
+      .service-card { min-height: 230px; padding: 23px; }
+      .about { padding: 82px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 46px; }
+      .about-visual { min-height: 380px; order: 2; }
+      .about-photo { inset: 0 30px 28px 0; }
+      .about-tag { width: 175px; padding: 20px; }
+      .about-tag strong { font-size: 28px; }
+      .price-list { padding: 6px 18px; }
+      .price-row { grid-template-columns: 1fr auto; gap: 8px 12px; padding: 13px 0; }
+      .price-row span:first-child { font-size: 12px; }
+      .price-unit { grid-row: 2; }
+      .price-value { grid-column: 2; grid-row: 1 / span 2; min-width: auto; font-size: 15px; }
+      .calculator { padding: 26px 22px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card, .project-card:first-child { grid-column: auto; min-height: 340px; }
+      .project-card:first-child { min-height: 400px; }
+      .steps-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .step { min-height: 210px; padding: 19px; }
+      .step h3 { margin-top: 31px; font-size: 16px; }
+      .step p { font-size: 11px; }
+      .contact { padding-bottom: 70px; }
+      .contact-panel { padding: 42px 25px; border-radius: 24px; }
+      .contact-panel h2 { font-size: 43px; }
+      .footer-top, .footer-bottom { align-items: flex-start; flex-direction: column; }
+      .footer-links { gap: 15px; }
+      .modal-card { padding: 28px 21px; }
+    }
+    @media (max-width: 390px) {
+      .hero-actions { flex-direction: column; align-items: stretch; max-width: 290px; }
+      .hero-stamp { display: none; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step { min-height: 180px; }
+    }
+
+    .language-control { display: inline-flex; align-items: center; flex: 0 0 auto; }
+    .language-control select { min-width: 66px; height: 42px; padding: 0 10px; border: 1px solid var(--line); border-radius: 999px; outline: 0; color: var(--ink); background: rgba(243,241,233,.94); font-size: 11px; font-weight: 800; cursor: pointer; }
+    .language-control select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
+    .request-submit:disabled { opacity: .62; cursor: wait; transform: none; }
+
+  </style>
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Гадир — на главную">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V9l9-6 9 6v11"/><path d="M8 20v-7h8v7M3 9h18"/></svg></span>
+        <span>ГАДИР<small>СТРОИТЕЛЬСТВО • ОТДЕЛКА</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Услуги</a>
+        <a href="#prices">Цены</a>
+        <a href="#projects">Примеры работ</a>
+        <a href="#process">Как работаем</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <label class="language-control" aria-label="Язык сайта">
+        <span class="visually-hidden">Язык сайта</span>
+        <select id="languageSelect" aria-label="Язык сайта">
+          <option value="ru">RU</option>
+          <option value="uk">UA</option>
+          <option value="en">EN</option>
+        </select>
+      </label>
+      <button class="btn btn-dark nav-cta" data-open-modal>Обсудить проект <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-content">
+          <div class="eyebrow reveal">Строительство и ремонт</div>
+          <h1 class="reveal delay-1">Делаем<br>пространство <span>лучше.</span></h1>
+          <p class="hero-lead reveal delay-2">От отдельных работ до комплексной отделки. Продумываем детали, соблюдаем технологию и заранее обсуждаем стоимость.</p>
+          <div class="hero-actions reveal delay-3">
+            <button class="btn" data-open-modal>Рассчитать мой проект <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+            <a class="btn btn-light" href="#services">Посмотреть услуги</a>
+          </div>
+          <div class="hero-note reveal delay-3"><span class="dot"></span> Работаем по понятной смете — без неожиданных пунктов</div>
+        </div>
+      </div>
+      <div class="hero-stamp"><div><strong>под ключ</strong><small>от идеи<br>до результата</small></div></div>
+      <div class="hero-bottom"></div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">
+      <div class="marquee-group"><span>Качество в деталях</span><i></i><span>Честная смета</span><i></i><span>Аккуратная работа</span><i></i><span>Надёжный результат</span><i></i><span>Качество в деталях</span><i></i></div>
+      <div class="marquee-group"><span>Качество в деталях</span><i></i><span>Честная смета</span><i></i><span>Аккуратная работа</span><i></i><span>Надёжный результат</span><i></i><span>Качество в деталях</span><i></i></div>
+    </div></div>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">Что умеем</div><h2>Работы, которые<br>делают дом домом.</h2></div>
+          <p>Можно заказать отдельную услугу или собрать комплекс работ под ваш объект. Состав и объём фиксируем до начала.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal"><span class="service-number">01</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-7h6v7M8 9h.01M16 9h.01"/></svg></div><h3>Комплексный ремонт</h3><p>Подготовка, черновые и чистовые этапы, координация работ на объекте.</p><div class="service-price"><span>Комплекс работ</span><strong>от 3 500 ₴/м²</strong></div></article>
+          <article class="service-card reveal delay-1"><span class="service-number">02</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4zM4 10h16M10 4v16M16 4v16M4 16h16"/></svg></div><h3>Укладка плитки</h3><p>Стены, пол, фартуки, санузлы. Разметка, подрезка и ровные швы.</p><div class="service-price"><span>Работа за м²</span><strong>от 550 ₴</strong></div></article>
+          <article class="service-card reveal delay-2"><span class="service-number">03</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M6 20V6h12v14M9 9h6M9 13h6M9 17h6"/></svg></div><h3>Штукатурка стен</h3><p>Выравнивание поверхностей по маякам и подготовка основания.</p><div class="service-price"><span>Работа за м²</span><strong>от 180 ₴</strong></div></article>
+          <article class="service-card reveal"><span class="service-number">04</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19l5-5 3 3 8-9M5 5h.01M19 19h.01"/><path d="M4 4h16v16H4z"/></svg></div><h3>Шпаклёвка и покраска</h3><p>Подготовка стен и потолков, грунтование, аккуратное нанесение краски.</p><div class="service-price"><span>Работа за м²</span><strong>от 150 ₴</strong></div></article>
+          <article class="service-card reveal delay-1"><span class="service-number">05</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M5 7v13h14V7M8 7V4h8v3M8 12h8M8 16h5"/></svg></div><h3>Гипсокартон</h3><p>Перегородки, короба, ниши, потолки и другие конструкции из ГКЛ.</p><div class="service-price"><span>Работа за м²</span><strong>от 350 ₴</strong></div></article>
+          <article class="service-card reveal delay-2"><span class="service-number">06</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M6 20V5h12v15M9 8h6M9 12h6M9 16h6"/><path d="M3 5h18"/></svg></div><h3>Полы и стяжка</h3><p>Стяжка основания, укладка ламината и подготовка под финишное покрытие.</p><div class="service-price"><span>Работа за м²</span><strong>от 250 ₴</strong></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="wrap about-grid">
+        <div class="about-visual reveal">
+          <div class="about-photo"><img src="data:image/jpeg;base64,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" alt="Гадир выполняет отделку стен плиткой" loading="lazy"></div>
+          <div class="about-tag"><strong>По делу.</strong><span>Без лишних обещаний — с вниманием к каждому этапу.</span></div>
+        </div>
+        <div class="about-text reveal delay-1">
+          <div class="eyebrow">Наш подход</div>
+          <h2>Не просто ремонт.<br><em>Продуманный результат.</em></h2>
+          <p class="about-copy">Хорошая работа начинается с понимания задачи. Сначала осматриваем объект и обсуждаем пожелания, затем согласовываем объём, материалы и смету. В процессе держим связь и не меняем договорённости без согласования.</p>
+          <div class="benefits">
+            <div class="benefit"><span class="benefit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span><div><strong>Понятная стоимость</strong><span>Разделяем работу и материалы, заранее обсуждаем дополнительные задачи.</span></div></div>
+            <div class="benefit"><span class="benefit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span><div><strong>Аккуратность на объекте</strong><span>Соблюдаем порядок работ и внимательно относимся к готовым поверхностям.</span></div></div>
+            <div class="benefit"><span class="benefit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 4 4L19 6"/></svg></span><div><strong>Связь на каждом этапе</strong><span>Обсуждаем решения и согласовываем изменения до их выполнения.</span></div></div>
+          </div>
+          <button class="btn btn-light" data-open-modal>Обсудить задачу <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="prices">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">Прозрачные цены</div><h2>Сколько стоит<br>работа?</h2></div>
+          <p>Ниже — пример стартового прайса за работу без материалов. Точную стоимость определяем после замера и оценки состояния поверхностей.</p>
+        </div>
+        <div class="pricing-layout">
+          <div class="price-list reveal">
+            <div class="price-row"><span>Штукатурка стен</span><span class="price-unit">за м²</span><strong class="price-value">350 ₴</strong></div>
+            <div class="price-row"><span>Шпаклёвка под покраску</span><span class="price-unit">за м²</span><strong class="price-value">300 ₴</strong></div>
+            <div class="price-row"><span>Покраска стен (2 слоя)</span><span class="price-unit">за м²</span><strong class="price-value">от 120 ₴</strong></div>
+            <div class="price-row"><span>Укладка плитки</span><span class="price-unit">за м²</span><strong class="price-value">от 700 ₴</strong></div>
+            <div class="price-row"><span>Монтаж гипсокартона</span><span class="price-unit">за м²</span><strong class="price-value">от 350 ₴</strong></div>
+            <div class="price-row"><span>Укладка ламината</span><span class="price-unit">за м²</span><strong class="price-value">от 220 ₴</strong></div>
+            <div class="price-row"><span>Стяжка пола</span><span class="price-unit">за м²</span><strong class="price-value">50 ₴</strong></div>
+            <div class="price-row"><span>Демонтажные работы</span><span class="price-unit">за м²</span><strong class="price-value">от 200 ₴</strong></div>
+            <p class="price-note">* Цены демонстрационные и подлежат замене на ваши актуальные расценки. Не являются публичной офертой. Стоимость материалов, доставка, сложная геометрия и подготовительные работы рассчитываются отдельно.</p>
+          </div>
+          <div class="calculator reveal delay-1">
+            <div class="eyebrow">Быстрый расчёт</div>
+            <h3>Узнайте примерную стоимость</h3>
+            <div class="field"><label for="calcService">Выберите работу</label><select id="calcService"><option value="350">Штукатурка стен — 350 ₴/м²</option><option value="300">Шпаклёвка — 300 ₴/м²</option><option value="120">Покраска — от 120 ₴/м²</option><option value="700">Укладка плитки — от 700 ₴/м²</option><option value="350">Гипсокартон — от 350 ₴/м²</option><option value="220">Укладка ламината — от 220 ₴/м²</option><option value="50">Стяжка пола — 50 ₴/м²</option><option value="200">Демонтаж — от 200 ₴/м²</option></select></div>
+            <div class="field"><label for="calcArea">Площадь, м²</label><input id="calcArea" type="number" min="1" max="10000" value="30" inputmode="numeric" /></div>
+            <div class="calc-result"><div><span>Ориентировочно от</span><strong id="calcTotal">5 400 ₴</strong></div><small>Точный расчёт<br>после замера</small></div>
+            <button class="btn" id="calcRequest">Запросить точную смету <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">Направления работ</div><h2>От черновой подготовки<br>до чистовой отделки.</h2></div>
+          <p>Здесь можно разместить фотографии ваших реальных объектов, этапов работ и готовых помещений.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card reveal"><img src="https://d48-a.sdn.cz/d_48/c_img_p7_A/kOzkBkwYBTDq3nML43FbEdTz/34b5.jpeg" alt="Отделка кухни и укладка плитки" loading="lazy"><div class="project-info"><span>Отделка помещений</span><h3>Кухни и жилые пространства</h3></div></article>
+          <article class="project-card reveal delay-1"><img src="https://grad.ua/uploads/posts/2026-01/1769816018_remont.webp" alt="Подготовка и выравнивание стен" loading="lazy"><div class="project-info"><span>Черновые работы</span><h3>Подготовка стен</h3></div></article>
+          <article class="project-card reveal delay-2"><img src="https://www.palmbld.com/images/locations/pompano-beach-fl/palm-build-reconstruction-pompano-beach-action.webp" alt="Работы по ремонту и отделке помещения" loading="lazy"><div class="project-info"><span>Ремонт и монтаж</span><h3>Комплексные задачи</h3></div></article>
+        </div>
+        <p class="photo-caption">Фотографии на этой версии сайта — иллюстративные. Перед публикацией замените их своими снимками выполненных работ.</p>
+      </div>
+    </section>
+
+    <section class="steps" id="process">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="eyebrow">Без лишней суеты</div><h2>Четыре шага<br>к готовому результату.</h2></div><p>Понятный порядок действий помогает контролировать бюджет, сроки и качество на каждом этапе.</p></div>
+        <div class="steps-grid">
+          <article class="step reveal"><h3>Знакомимся</h3><p>Вы рассказываете о задаче, показываете фото или план помещения.</p></article>
+          <article class="step reveal delay-1"><h3>Смотрим объект</h3><p>Уточняем объём, делаем замеры и обсуждаем подходящие материалы.</p></article>
+          <article class="step reveal delay-2"><h3>Согласовываем</h3><p>Подготавливаем смету, последовательность работ и условия.</p></article>
+          <article class="step reveal delay-3"><h3>Выполняем</h3><p>Проводим работы, показываем этапы и сдаём готовый результат.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacts">
+      <div class="wrap">
+        <div class="contact-panel reveal">
+          <div class="contact-content">
+            <div class="eyebrow">Есть объект или идея?</div>
+            <h2>Давайте обсудим<br>вашу задачу.</h2>
+            <p>Расскажите, что нужно сделать. Уточним детали, подскажем с чего начать и сориентируем по стоимости.</p>
+            <div class="contact-details" aria-label="Контактные данные мастера">
+              <span class="contact-person">Мастер: Гадир</span>
+              <a href="tel:+380983013344">+380983013344</a>
+              <a href="https://wa.me/380983013344" target="_blank" rel="noopener noreferrer">Написать в WhatsApp ↗</a>
+            </div>
+            <button class="btn" data-open-modal>Оставить заявку <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V9l9-6 9 6v11"/><path d="M8 20v-7h8v7M3 9h18"/></svg></span><span>ГАДИР<small>СТРОИТЕЛЬСТВО • ОТДЕЛКА</small></span></a>
+        <div class="footer-links"><a href="#services">Услуги</a><a href="#prices">Цены</a><a href="#projects">Работы</a><a href="#process">Этапы</a><a href="#contacts">Контакты</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> ГАДИР. Все права защищены.</span><span>Сайт-визитка строительных и отделочных работ</span></div>
+    </div>
+  </footer>
+
+  <div class="modal" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <div class="eyebrow">Заявка на расчёт</div>
+      <h3 id="modalTitle">Расскажите о задаче</h3>
+      <p>Заполните форму — подготовим текст заявки для мастера Гадира в WhatsApp.</p>
+      <form id="requestForm">
+        <div class="field"><label for="clientName">Ваше имя</label><input id="clientName" name="name" placeholder="Как к вам обращаться?" required maxlength="60" /></div>
+        <div class="field"><label for="clientPhone">Номер телефона</label><input id="clientPhone" name="phone" type="tel" placeholder="+380..." required maxlength="30" /></div>
+        <div class="field"><label for="clientService">Какая работа нужна?</label><select id="clientService" name="service"><option value="repair">Комплексный ремонт</option><option value="tile">Укладка плитки</option><option value="plaster">Штукатурка / шпаклёвка</option><option value="painting">Покраска</option><option value="drywall">Гипсокартон</option><option value="floor">Полы и стяжка</option><option value="other">Другая задача</option></select></div>
+        <div class="field"><label for="clientDetails">Комментарий (необязательно)</label><textarea id="clientDetails" name="details" placeholder="Площадь, адрес района, пожелания..."></textarea></div>
+        <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn request-submit" type="submit">Подготовить заявку <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    const translations = {"uk":{"Услуги":"Послуги","Цены":"Ціни","Примеры работ":"Приклади робіт","Как работаем":"Як працюємо","Контакты":"Контакти","Строительство и ремонт":"Будівництво та ремонт","Делаем":"Робимо","пространство":"простір","лучше.":"кращим.","От отдельных работ до комплексной отделки. Продумываем детали, соблюдаем технологию и заранее обсуждаем стоимость.":"Від окремих робіт до комплексного оздоблення. Продумуємо деталі, дотримуємося технологій і заздалегідь узгоджуємо вартість.","Рассчитать мой проект":"Розрахувати мій проєкт","Посмотреть услуги":"Переглянути послуги","Работаем по понятной смете — без неожиданных пунктов":"Працюємо за зрозумілим кошторисом — без несподіваних пунктів","под ключ":"під ключ","от идеи":"від ідеї","до результата":"до результату","Качество в деталях":"Якість у деталях","Честная смета":"Чесний кошторис","Аккуратная работа":"Охайна робота","Надёжный результат":"Надійний результат","Что умеем":"Що ми вміємо","Работы, которые":"Роботи, що","делают дом домом.":"роблять дім домом.","Можно заказать отдельную услугу или собрать комплекс работ под ваш объект. Состав и объём фиксируем до начала.":"Можна замовити окрему послугу або комплекс робіт для вашого об’єкта. Склад і обсяг узгоджуємо до початку.","Комплексный ремонт":"Комплексний ремонт","Подготовка, черновые и чистовые этапы, координация работ на объекте.":"Підготовка, чорнові й чистові етапи, координація робіт на об’єкті.","Комплекс работ":"Комплекс робіт","Укладка плитки":"Укладання плитки","Стены, пол, фартуки, санузлы. Разметка, подрезка и ровные швы.":"Стіни, підлога, кухонні фартухи, санвузли. Розмітка, підрізання та рівні шви.","Работа за м²":"Робота за м²","Штукатурка стен":"Штукатурення стін","Выравнивание поверхностей по маякам и подготовка основания.":"Вирівнювання поверхонь за маяками та підготовка основи.","Шпаклёвка и покраска":"Шпаклювання та фарбування","Подготовка стен и потолков, грунтование, аккуратное нанесение краски.":"Підготовка стін і стель, ґрунтування, акуратне нанесення фарби.","Гипсокартон":"Гіпсокартон","Перегородки, короба, ниши, потолки и другие конструкции из ГКЛ.":"Перегородки, короби, ніші, стелі та інші конструкції з гіпсокартону.","Полы и стяжка":"Підлога та стяжка","Стяжка основания, укладка ламината и подготовка под финишное покрытие.":"Стяжка основи, укладання ламінату та підготовка під фінішне покриття.","По делу.":"Без зайвого.","Без лишних обещаний — с вниманием к каждому этапу.":"Без гучних обіцянок — з увагою до кожного етапу.","Наш подход":"Наш підхід","Не просто ремонт.":"Не просто ремонт.","Продуманный результат.":"Продуманий результат.","Хорошая работа начинается с понимания задачи. Сначала осматриваем объект и обсуждаем пожелания, затем согласовываем объём, материалы и смету. В процессе держим связь и не меняем договорённости без согласования.":"Якісна робота починається з розуміння завдання. Спочатку оглядаємо об’єкт і обговорюємо побажання, потім узгоджуємо обсяг, матеріали та кошторис. Під час робіт залишаємося на зв’язку й не змінюємо домовленості без погодження.","Понятная стоимость":"Зрозуміла вартість","Разделяем работу и материалы, заранее обсуждаем дополнительные задачи.":"Окремо рахуємо роботу й матеріали, заздалегідь обговорюємо додаткові завдання.","Аккуратность на объекте":"Охайність на об’єкті","Соблюдаем порядок работ и внимательно относимся к готовым поверхностям.":"Дотримуємося послідовності робіт і бережно ставимося до готових поверхонь.","Связь на каждом этапе":"Зв’язок на кожному етапі","Обсуждаем решения и согласовываем изменения до их выполнения.":"Обговорюємо рішення та погоджуємо зміни до їх виконання.","Обсудить задачу":"Обговорити завдання","Обсудить проект":"Обговорити проєкт","Язык сайта":"Мова сайту","от 3 500 ₴/м²":"від 3 500 ₴/м²","от 550 ₴":"від 550 ₴","от 180 ₴":"від 180 ₴","от 150 ₴":"від 150 ₴","от 350 ₴":"від 350 ₴","от 250 ₴":"від 250 ₴","от 120 ₴":"від 120 ₴","от 200 ₴":"від 200 ₴","от 220 ₴":"від 220 ₴","от 700 ₴":"від 700 ₴","Прозрачные цены":"Прозорі ціни","Сколько стоит":"Скільки коштує","работа?":"робота?","Ниже — пример стартового прайса за работу без материалов. Точную стоимость определяем после замера и оценки состояния поверхностей.":"Нижче наведено орієнтовні стартові ціни за роботу без матеріалів. Точну вартість визначаємо після замірів та оцінки стану поверхонь.","за м²":"за м²","Шпаклёвка под покраску":"Шпаклювання під фарбування","Покраска стен (2 слоя)":"Фарбування стін (2 шари)","Монтаж гипсокартона":"Монтаж гіпсокартону","Укладка ламината":"Укладання ламінату","Стяжка пола":"Стяжка підлоги","Демонтажные работы":"Демонтажні роботи","* Цены демонстрационные и подлежат замене на ваши актуальные расценки. Не являются публичной офертой. Стоимость материалов, доставка, сложная геометрия и подготовительные работы рассчитываются отдельно.":"* Ціни наведено для прикладу — замініть їх на актуальні розцінки. Вони не є публічною офертою. Вартість матеріалів, доставки, складної геометрії та підготовчих робіт розраховується окремо.","Быстрый расчёт":"Швидкий розрахунок","Узнайте примерную стоимость":"Дізнайтеся орієнтовну вартість","Выберите работу":"Оберіть роботу","Штукатурка стен — 350 ₴/м²":"Штукатурення стін — 350 ₴/м²","Шпаклёвка — 300 ₴/м²":"Шпаклювання — 300 ₴/м²","Покраска — от 120 ₴/м²":"Фарбування — від 120 ₴/м²","Укладка плитки — от 700 ₴/м²":"Укладання плитки — від 700 ₴/м²","Гипсокартон — от 350 ₴/м²":"Гіпсокартон — від 350 ₴/м²","Укладка ламината — от 220 ₴/м²":"Укладання ламінату — від 220 ₴/м²","Стяжка пола — 50 ₴/м²":"Стяжка підлоги — 50 ₴/м²","Демонтаж — от 200 ₴/м²":"Демонтаж — від 200 ₴/м²","Площадь, м²":"Площа, м²","Ориентировочно от":"Орієнтовно від","Точный расчёт":"Точний розрахунок","после замера":"після замірів","Запросить точную смету":"Запросити точний кошторис","Направления работ":"Напрями робіт","От черновой подготовки":"Від чорнової підготовки","до чистовой отделки.":"до чистового оздоблення.","Здесь можно разместить фотографии ваших реальных объектов, этапов работ и готовых помещений.":"Тут можна розмістити фотографії ваших реальних об’єктів, етапів робіт і готових приміщень.","Отделка помещений":"Оздоблення приміщень","Кухни и жилые пространства":"Кухні та житлові простори","Черновые работы":"Чорнові роботи","Подготовка стен":"Підготовка стін","Ремонт и монтаж":"Ремонт і монтаж","Комплексные задачи":"Комплексні завдання","Фотографии на этой версии сайта — иллюстративные. Перед публикацией замените их своими снимками выполненных работ.":"Фотографії на цій версії сайту — ілюстративні. Перед публікацією замініть їх власними фото виконаних робіт.","Без лишней суеты":"Без зайвої метушні","Четыре шага":"Чотири кроки","к готовому результату.":"до готового результату.","Понятный порядок действий помогает контролировать бюджет, сроки и качество на каждом этапе.":"Зрозуміла послідовність дій допомагає контролювати бюджет, строки та якість на кожному етапі.","Знакомимся":"Знайомимося","Вы рассказываете о задаче, показываете фото или план помещения.":"Ви розповідаєте про завдання, показуєте фото або план приміщення.","Смотрим объект":"Оглядаємо об’єкт","Уточняем объём, делаем замеры и обсуждаем подходящие материалы.":"Уточнюємо обсяг, робимо заміри та обговорюємо відповідні матеріали.","Согласовываем":"Узгоджуємо","Подготавливаем смету, последовательность работ и условия.":"Готуємо кошторис, послідовність робіт та умови.","Выполняем":"Виконуємо","Проводим работы, показываем этапы и сдаём готовый результат.":"Виконуємо роботи, показуємо етапи та здаємо готовий результат.","Есть объект или идея?":"Є об’єкт або ідея?","Давайте обсудим":"Обговорімо","вашу задачу.":"ваше завдання.","Расскажите, что нужно сделать. Уточним детали, подскажем с чего начать и сориентируем по стоимости.":"Розкажіть, що потрібно зробити. Уточнимо деталі, підкажемо, з чого почати, та зорієнтуємо за вартістю.","Мастер: Гадир":"Майстер: Гадір","Написать в WhatsApp ↗":"Написати у WhatsApp ↗","Оставить заявку":"Залишити заявку","СТРОИТЕЛЬСТВО • ОТДЕЛКА":"БУДІВНИЦТВО • ОЗДОБЛЕННЯ","Работы":"Роботи","Этапы":"Етапи","ГАДИР. Все права защищены.":"ГАДІР. Усі права захищені.","Сайт-визитка строительных и отделочных работ":"Сайт-візитка будівельних та оздоблювальних робіт","Заявка на расчёт":"Заявка на розрахунок","Расскажите о задаче":"Розкажіть про завдання","Заполните форму — подготовим текст заявки для мастера Гадира в WhatsApp.":"Заповніть форму — заявка надійде майстру Гадіру в Telegram.","Ваше имя":"Ваше ім’я","Номер телефона":"Номер телефону","Какая работа нужна?":"Які роботи потрібні?","Штукатурка / шпаклёвка":"Штукатурення / шпаклювання","Покраска":"Фарбування","Другая задача":"Інше завдання","Комментарий (необязательно)":"Коментар (необов’язково)","Подготовить заявку":"Надіслати заявку"},"en":{"Услуги":"Services","Цены":"Pricing","Примеры работ":"Our work","Как работаем":"How it works","Контакты":"Contact","Строительство и ремонт":"Construction & renovation","Делаем":"Making","пространство":"your space","лучше.":"better.","От отдельных работ до комплексной отделки. Продумываем детали, соблюдаем технологию и заранее обсуждаем стоимость.":"From individual jobs to complete finishing. We plan the details, follow proper techniques and discuss costs in advance.","Рассчитать мой проект":"Get a project estimate","Посмотреть услуги":"View services","Работаем по понятной смете — без неожиданных пунктов":"Clear estimates — no unexpected charges","под ключ":"turnkey","от идеи":"from idea","до результата":"to completion","Качество в деталях":"Quality in every detail","Честная смета":"Transparent estimates","Аккуратная работа":"Careful workmanship","Надёжный результат":"Reliable results","Что умеем":"What we do","Работы, которые":"Work that","делают дом домом.":"makes a house a home.","Можно заказать отдельную услугу или собрать комплекс работ под ваш объект. Состав и объём фиксируем до начала.":"Order a single service or combine several jobs for your property. We agree on the scope before work begins.","Комплексный ремонт":"Full renovation","Подготовка, черновые и чистовые этапы, координация работ на объекте.":"Preparation, rough-in and finishing stages, and on-site coordination.","Комплекс работ":"Full-service package","Укладка плитки":"Tile installation","Стены, пол, фартуки, санузлы. Разметка, подрезка и ровные швы.":"Walls, floors, kitchen backsplashes and bathrooms. Accurate layout, cuts and even joints.","Работа за м²":"Labor per m²","Штукатурка стен":"Wall plastering","Выравнивание поверхностей по маякам и подготовка основания.":"Leveling surfaces with guide rails and preparing the substrate.","Шпаклёвка и покраска":"Filling and painting","Подготовка стен и потолков, грунтование, аккуратное нанесение краски.":"Preparing walls and ceilings, priming and carefully applying paint.","Гипсокартон":"Drywall","Перегородки, короба, ниши, потолки и другие конструкции из ГКЛ.":"Partitions, enclosures, niches, ceilings and other drywall structures.","Полы и стяжка":"Flooring and screed","Стяжка основания, укладка ламината и подготовка под финишное покрытие.":"Floor screeding, laminate installation and subfloor preparation.","По делу.":"Straightforward.","Без лишних обещаний — с вниманием к каждому этапу.":"No empty promises — just care at every stage.","Наш подход":"Our approach","Не просто ремонт.":"More than renovation.","Продуманный результат.":"A result planned through.","Хорошая работа начинается с понимания задачи. Сначала осматриваем объект и обсуждаем пожелания, затем согласовываем объём, материалы и смету. В процессе держим связь и не меняем договорённости без согласования.":"Good work starts with understanding the task. We inspect the property and discuss your expectations, then agree on the scope, materials and estimate. We stay in touch throughout the process and never change agreed terms without approval.","Понятная стоимость":"Clear pricing","Разделяем работу и материалы, заранее обсуждаем дополнительные задачи.":"Labor and materials are itemized; extra work is discussed in advance.","Аккуратность на объекте":"Care on site","Соблюдаем порядок работ и внимательно относимся к готовым поверхностям.":"We follow the correct work sequence and protect finished surfaces.","Связь на каждом этапе":"Communication at every stage","Обсуждаем решения и согласовываем изменения до их выполнения.":"We discuss solutions and approve changes before carrying them out.","Обсудить задачу":"Discuss your project","Обсудить проект":"Discuss your project","Язык сайта":"Website language","от 3 500 ₴/м²":"from 3,500 ₴/m²","от 550 ₴":"from 550 ₴","от 180 ₴":"from 180 ₴","от 150 ₴":"from 150 ₴","от 350 ₴":"from 350 ₴","от 250 ₴":"from 250 ₴","от 120 ₴":"from 120 ₴","от 200 ₴":"from 200 ₴","от 220 ₴":"from 220 ₴","от 700 ₴":"from 700 ₴","Прозрачные цены":"Transparent pricing","Сколько стоит":"What does the","работа?":"work cost?","Ниже — пример стартового прайса за работу без материалов. Точную стоимость определяем после замера и оценки состояния поверхностей.":"Below are sample starting labor rates, excluding materials. The final price is determined after measurements and an assessment of the surfaces.","за м²":"per m²","Шпаклёвка под покраску":"Filling for painting","Покраска стен (2 слоя)":"Wall painting (2 coats)","Монтаж гипсокартона":"Drywall installation","Укладка ламината":"Laminate installation","Стяжка пола":"Floor screed","Демонтажные работы":"Demolition work","* Цены демонстрационные и подлежат замене на ваши актуальные расценки. Не являются публичной офертой. Стоимость материалов, доставка, сложная геометрия и подготовительные работы рассчитываются отдельно.":"* Prices are illustrative and should be replaced with your current rates. They are not a public offer. Materials, delivery, complex geometry and preparatory work are calculated separately.","Быстрый расчёт":"Quick estimate","Узнайте примерную стоимость":"Get an approximate cost","Выберите работу":"Select a service","Штукатурка стен — 350 ₴/м²":"Wall plastering — 350 ₴/m²","Шпаклёвка — 300 ₴/м²":"Wall filling — 300 ₴/m²","Покраска — от 120 ₴/м²":"Painting — from 120 ₴/m²","Укладка плитки — от 700 ₴/м²":"Tile installation — from 700 ₴/m²","Гипсокартон — от 350 ₴/м²":"Drywall — from 350 ₴/m²","Укладка ламината — от 220 ₴/м²":"Laminate installation — from 220 ₴/m²","Стяжка пола — 50 ₴/м²":"Floor screed — 50 ₴/m²","Демонтаж — от 200 ₴/м²":"Demolition — from 200 ₴/m²","Площадь, м²":"Area, m²","Ориентировочно от":"Estimated from","Точный расчёт":"Exact estimate","после замера":"after measurement","Запросить точную смету":"Request a detailed estimate","Направления работ":"Project types","От черновой подготовки":"From rough preparation","до чистовой отделки.":"to final finishes.","Здесь можно разместить фотографии ваших реальных объектов, этапов работ и готовых помещений.":"Add photos of your actual projects, work stages and completed spaces here.","Отделка помещений":"Interior finishing","Кухни и жилые пространства":"Kitchens and living spaces","Черновые работы":"Rough work","Подготовка стен":"Wall preparation","Ремонт и монтаж":"Renovation and installation","Комплексные задачи":"Complete projects","Фотографии на этой версии сайта — иллюстративные. Перед публикацией замените их своими снимками выполненных работ.":"Photos on this version of the website are illustrative. Replace them with photos of your completed work before publishing.","Без лишней суеты":"No unnecessary hassle","Четыре шага":"Four steps","к готовому результату.":"to a finished result.","Понятный порядок действий помогает контролировать бюджет, сроки и качество на каждом этапе.":"A clear process helps keep the budget, timeline and quality under control at every stage.","Знакомимся":"Get acquainted","Вы рассказываете о задаче, показываете фото или план помещения.":"Tell us what you need and share photos or a floor plan.","Смотрим объект":"Inspect the property","Уточняем объём, делаем замеры и обсуждаем подходящие материалы.":"We confirm the scope, take measurements and discuss suitable materials.","Согласовываем":"Agree on the plan","Подготавливаем смету, последовательность работ и условия.":"We prepare the estimate, work schedule and terms.","Выполняем":"Do the work","Проводим работы, показываем этапы и сдаём готовый результат.":"We complete the work, share progress and hand over the result.","Есть объект или идея?":"Have a project or an idea?","Давайте обсудим":"Let’s discuss","вашу задачу.":"your project.","Расскажите, что нужно сделать. Уточним детали, подскажем с чего начать и сориентируем по стоимости.":"Tell us what needs to be done. We’ll clarify the details, suggest where to start and provide an initial cost estimate.","Мастер: Гадир":"Contractor: Gadir","Написать в WhatsApp ↗":"Message on WhatsApp ↗","Оставить заявку":"Send an inquiry","СТРОИТЕЛЬСТВО • ОТДЕЛКА":"CONSTRUCTION • FINISHING","Работы":"Projects","Этапы":"Process","ГАДИР. Все права защищены.":"GADIR. All rights reserved.","Сайт-визитка строительных и отделочных работ":"Construction and renovation services","Заявка на расчёт":"Request an estimate","Расскажите о задаче":"Tell us about your project","Заполните форму — подготовим текст заявки для мастера Гадира в WhatsApp.":"Complete the form and your inquiry will be sent to Gadir via Telegram.","Ваше имя":"Your name","Номер телефона":"Phone number","Какая работа нужна?":"What work do you need?","Штукатурка / шпаклёвка":"Plastering / filling","Покраска":"Painting","Другая задача":"Other","Комментарий (необязательно)":"Comment (optional)","Подготовить заявку":"Send inquiry"}};
+    const languageSelect = document.getElementById('languageSelect');
+    const currentLanguageLabels = { ru: 'Русский', uk: 'Українська', en: 'English' };
+    const originalTextNodes = [];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let textNode;
+    while ((textNode = walker.nextNode())) {
+      if (textNode.parentElement && !['SCRIPT', 'STYLE'].includes(textNode.parentElement.tagName)) {
+        originalTextNodes.push({ node: textNode, value: textNode.nodeValue });
+      }
+    }
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+    const modal = $('#requestModal');
+    const form = $('#requestForm');
+    const submitButton = $('.request-submit', form);
+    const toast = $('#toast');
+    const calcService = $('#calcService');
+    const calcArea = $('#calcArea');
+    const calcTotal = $('#calcTotal');
+    let toastTimer;
+    let currentLanguage = 'ru';
+
+    const attributeTranslations = {
+      ru: {
+        'html[lang]': 'ru',
+        'title': 'Гадир — строительство и отделка',
+        'meta[name="description"]': 'Строительные и отделочные работы: ремонт, плитка, штукатурка, покраска и комплексная отделка.',
+        '.brand[aria-label]': 'Гадир — на главную',
+        '#menuToggle': 'Открыть меню',
+        '#modalClose': 'Закрыть',
+        '.contact-details': 'Контактные данные мастера',
+        '#clientName': 'Как к вам обращаться?',
+        '#clientPhone': '+380...',
+        '#clientDetails': 'Площадь, адрес района, пожелания...',
+        '#languageSelect': 'Язык сайта'
+      },
+      uk: {
+        'html[lang]': 'uk',
+        'title': 'Гадір — будівництво та оздоблення',
+        'meta[name="description"]': 'Будівельні та оздоблювальні роботи: ремонт, плитка, штукатурення, фарбування та комплексне оздоблення.',
+        '.brand[aria-label]': 'Гадір — на головну',
+        '#menuToggle': 'Відкрити меню',
+        '#modalClose': 'Закрити',
+        '.contact-details': 'Контактні дані майстра',
+        '#clientName': 'Як до вас звертатися?',
+        '#clientPhone': '+380...',
+        '#clientDetails': 'Площа, район, побажання...',
+        '#languageSelect': 'Мова сайту'
+      },
+      en: {
+        'html[lang]': 'en',
+        'title': 'Gadir — construction and finishing',
+        'meta[name="description"]': 'Construction and finishing services: renovation, tiling, plastering, painting and complete interior finishing.',
+        '.brand[aria-label]': 'Gadir — home',
+        '#menuToggle': 'Open menu',
+        '#modalClose': 'Close',
+        '.contact-details': 'Contractor contact details',
+        '#clientName': 'How should we address you?',
+        '#clientPhone': '+380...',
+        '#clientDetails': 'Area, neighborhood, requirements...',
+        '#languageSelect': 'Website language'
+      }
+    };
+
+    function setLocalizedAttributes(language) {
+      const values = attributeTranslations[language];
+      document.documentElement.lang = values['html[lang]'];
+      document.title = values.title;
+      $('meta[name="description"]').content = values['meta[name="description"]'];
+      $('.brand').setAttribute('aria-label', values['.brand[aria-label]']);
+      $('#menuToggle').setAttribute('aria-label', values['#menuToggle']);
+      $('#modalClose').setAttribute('aria-label', values['#modalClose']);
+      $('.contact-details').setAttribute('aria-label', values['.contact-details']);
+      $('#clientName').placeholder = values['#clientName'];
+      $('#clientPhone').placeholder = values['#clientPhone'];
+      $('#clientDetails').placeholder = values['#clientDetails'];
+      languageSelect.setAttribute('aria-label', values['#languageSelect']);
+    }
+
+    function applyLanguage(language, persist = true) {
+      currentLanguage = ['ru', 'uk', 'en'].includes(language) ? language : 'ru';
+      const dictionary = translations[currentLanguage] || {};
+      originalTextNodes.forEach(({ node, value }) => {
+        const trimmed = value.trim();
+        if (!trimmed) return;
+        const translated = dictionary[trimmed] || trimmed;
+        node.nodeValue = value.replace(trimmed, translated);
+      });
+      setLocalizedAttributes(currentLanguage);
+      languageSelect.value = currentLanguage;
+      if (persist) {
+        try { localStorage.setItem('gadir-site-language', currentLanguage); } catch (error) {}
+      }
+      updateCalculator();
+    }
+
+    try {
+      const savedLanguage = localStorage.getItem('gadir-site-language');
+      if (savedLanguage && ['ru', 'uk', 'en'].includes(savedLanguage)) currentLanguage = savedLanguage;
+    } catch (error) {}
+
+    $('#year').textContent = new Date().getFullYear();
+
+    const header = $('#header');
+    const menuToggle = $('#menuToggle');
+    const navLinks = $('#navLinks');
+    const closeMenu = () => {
+      navLinks.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    };
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      document.body.classList.toggle('menu-open', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    $$('#navLinks a').forEach(link => link.addEventListener('click', closeMenu));
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 25), { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      $$('.reveal').forEach(el => revealObserver.observe(el));
+    } else {
+      $$('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    const formatMoney = value => new Intl.NumberFormat(currentLanguage === 'en' ? 'en-US' : currentLanguage === 'uk' ? 'uk-UA' : 'ru-RU').format(value) + ' ₴';
+    function updateCalculator() {
+      const rate = Number(calcService.value) || 0;
+      const area = Math.max(0, Math.min(10000, Number(calcArea.value) || 0));
+      calcTotal.textContent = formatMoney(rate * area);
+    }
+    calcService.addEventListener('change', updateCalculator);
+    calcArea.addEventListener('input', updateCalculator);
+
+    const openModal = () => {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      window.setTimeout(() => $('#clientName').focus(), 180);
+    };
+    const closeModal = () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    $$('[data-open-modal]').forEach(button => button.addEventListener('click', openModal));
+    $('#modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeModal();
+        closeMenu();
+      }
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('show'), 4200);
+    }
+
+    const toastMessages = {
+      ru: { sending: 'Отправляем заявку…', success: 'Заявка отправлена! Мастер скоро свяжется с вами.', error: 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните мастеру.', invalid: 'Проверьте имя и номер телефона.' },
+      uk: { sending: 'Надсилаємо заявку…', success: 'Заявку надіслано! Майстер незабаром зв’яжеться з вами.', error: 'Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте майстру.', invalid: 'Перевірте ім’я та номер телефону.' },
+      en: { sending: 'Sending your inquiry…', success: 'Inquiry sent! The contractor will contact you soon.', error: 'Could not send the inquiry. Please try again or call the contractor.', invalid: 'Please check your name and phone number.' }
+    };
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get('name') || '').trim(),
+        phone: String(formData.get('phone') || '').trim(),
+        service: $('#clientService').selectedOptions[0]?.textContent.trim() || '',
+        details: String(formData.get('details') || '').trim(),
+        language: currentLanguage,
+        website: String(formData.get('website') || '')
+      };
+      if (payload.name.length < 2 || payload.phone.replace(/\D/g, '').length < 7) {
+        showToast(toastMessages[currentLanguage].invalid);
+        return;
+      }
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+      showToast(toastMessages[currentLanguage].sending);
+      try {
+        const response = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) throw new Error('Request failed');
+        form.reset();
+        closeModal();
+        showToast(toastMessages[currentLanguage].success);
+      } catch (error) {
+        showToast(toastMessages[currentLanguage].error);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+      }
+    });
+
+    $('#calcRequest').addEventListener('click', () => {
+      const servicesByIndex = ['plaster', 'plaster', 'painting', 'tile', 'drywall', 'floor', 'floor', 'other'];
+      $('#clientService').value = servicesByIndex[calcService.selectedIndex] || 'repair';
+      $('#clientDetails').value = `Площадь: ${calcArea.value || 0} м². Предварительная стоимость работ: ${calcTotal.textContent}.`;
+      openModal();
+    });
+
+    languageSelect.addEventListener('change', event => applyLanguage(event.target.value));
+    applyLanguage(currentLanguage, false);
+  </script>
+</body>
+</html>
